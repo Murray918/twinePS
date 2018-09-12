@@ -1,0 +1,19 @@
+{
+  "name": "twineps",
+  "version": "1.0.0",
+  "description": "this is a pluralsight tutorial on building a command line interface that lets me post tweets from my command line.  I wish to build other command line applets to increase productivity.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Murray918/twinePS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Murray918/twinePS/issues"
+  },
+  "homepage": "https://github.com/Murray918/twinePS#readme"
+}
