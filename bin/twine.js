@@ -1,3 +1,3 @@
 #! /usr/bin/env node
 
-console.log("PARTY world");
+console.log('PARTY world')
