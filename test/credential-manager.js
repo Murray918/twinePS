@@ -29,8 +29,7 @@ describe('a credential manger', () => {
       expect(secret).to.equal('Wayne')
     })
   })
-  after(() => {
-    creds.conf.delete('apiKey')
-    creds.conf.delete('apiSecret')
+  after(async () => {
+    await creds.clearKeyAndSecret()
   })
 })
