@@ -7,7 +7,7 @@
   "description": "this is a pluralsight tutorial on building a command line interface that lets me post tweets from my command line.  I wish to build other command line applets to increase productivity.",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/Murray918/twinePS#readme",
   "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
     "dirty-chai": "^2.0.1",
     "eslint": "^5.5.0",
     "eslint-config-standard": "^12.0.0",
@@ -27,15 +29,14 @@
     "eslint-plugin-mocha": "^5.2.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^5.2.0"
   },
   "dependencies": {
-    "chai": "^4.1.2",
     "commander": "^2.18.0",
     "configstore": "^4.0.0",
     "inquirer": "^6.2.0",
     "keytar-prebuild": "^4.1.1",
-    "mocha": "^5.2.0",
     "sinon": "^6.3.1"
   }
 }
