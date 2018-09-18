@@ -52,7 +52,7 @@ const configure = {
       tokenResponse['oauth_token'],
       tokenResponse['oauth_token_secret']
     )
-    console.log(`Account "${verifyResponse['screen_name']}" successfully adeed`)
+    console.log(`Account "${verifyResponse['screen_name']}" successfully added`)
   }
 }
 

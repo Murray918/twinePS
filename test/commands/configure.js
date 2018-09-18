@@ -19,7 +19,7 @@ describe('the configure module', () => {
     creds = new CredentialManager('twine-test')
   })
   beforeEach(() => {
-    sandbox = sinon.sandbox.create()
+    sandbox = sinon.createSandbox()
   })
   it('should add credentials when none are found', async () => {
     sandbox.stub(inquirer, 'prompt').resolves({ key: 'one', secret: 'two' })
@@ -38,26 +38,19 @@ describe('the configure module', () => {
     expect(inquirer.prompt.calledOnce).to.be.true()
   })
   it('should add an account', async () => {
-    sandbox
-      .stub(CredentialManager.prototype, 'getKeyAndSecret')
+    sandbox.stub(CredentialManager.prototype, 'getKeyAndSecret')
       .resolves(['key', 'secret'])
-    sandbox
-      .stub(Twitter.prototype, 'post')
-      .onFirstCall()
-      .resolves('oauth_token=abc&oauth_token_secret=def')
-      .onSecondCall()
-      .resolves('oauth_token=ghi&oauth_token_secret=jkl')
+    sandbox.stub(Twitter.prototype, 'post')
+      .onFirstCall().resolves('oauth_token=abc&oauth_token_secret=def')
+      .onSecondCall().resolves('oauth_token=ghi&oauth_token_secret=jkl')
     sandbox.stub(Twitter.prototype, 'get').resolves({ screen_name: 'foo' })
-    sandbox
-      .stub(inquirer, 'prompt')
-      .onFirstCall()
-      .resolves({ continue: '' })
-      .onSecondCall()
-      .resolves({ pin: '1234' })
+    sandbox.stub(inquirer, 'prompt')
+      .onFirstCall().resolves({ continue: '' })
+      .onSecondCall().resolves({ pin: '1234' })
     sandbox.stub(util, 'openBrowser').returns('')
     sandbox.spy(console, 'log')
     await configure.account('twine-test')
-    CredentialManager.prototype.getKeyAndSecret.retore()
+    CredentialManager.prototype.getKeyAndSecret.restore()
     let [token, secret] = await creds.getKeyAndSecret('accountToken')
     expect(token).to.equal('ghi')
     expect(secret).to.equal('jkl')
