@@ -14,6 +14,21 @@ describe('the credential manger', () => {
   before(() => {
     creds = new CredentialManager('twine-test')
   })
+  it('should return credentials set in the environment', async () => {
+    process.env['TWINE-TEST_CONSUMER_KEY'] = 'one'
+    process.env['TWINE-TEST_CONSUMER_SECRET'] = 'two'
+    let [key, secret] = await creds.getKeyAndSecret('consumer')
+    expect(key).to.equal('one')
+    expect(secret).to.equal('two')
+  })
+  it('should prefer credentials set in the environment', async () => {
+    await creds.storeKeyAndSecret('consumer', 'foo', 'bar')
+    let [key, secret] = await creds.getKeyAndSecret('consumer')
+    expect(key).to.equal('one')
+    expect(secret).to.equal('two')
+    delete process.env['TWINE-TEST_CONSUMER_KEY']
+    delete process.env['TWINE-TEST_CONSUMER_SECRET']
+  })
   it('should return credentials when they are found', async () => {
     await creds.storeKeyAndSecret('consumer', 'foo', 'bar')
     let [key, secret] = await creds.getKeyAndSecret('consumer')
