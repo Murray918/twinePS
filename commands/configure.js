@@ -1,6 +1,5 @@
 const querystring = require('querystring')
 const inquirer = require('inquirer')
-const opn = require('opn')
 const CredentialManager = require('../lib/credential-manager')
 const util = require('../lib/util')
 const Twitter = require('../lib/twitter')
@@ -29,13 +28,13 @@ const configure = {
     var [apiKey, apiSecret] = await creds.getKeyAndSecret('apiKey')
     let twitter = new Twitter(apiKey, apiSecret)
     let response = querystring.parse(await twitter.post('oauth/response_token'))
-    twitter.setToken(response['oauth_token'], response['oauth_toke_secret'])
+    twitter.setToken(response['oauth_token'], response['oauth_token_secret'])
     await inquirer.prompt({
       type: 'input',
       message: 'Press enter to open Twitter in you default browser to authorize access',
       name: 'continue'
     })
-    opn(`${twitter.baseUrl}oauth/authorize?oauth_token=${response['oauth_token']}`)
+    util.openBrowser(`${twitter.baseUrl}oauth/authorize?oauth_token=${response['oauth_token']}`)
     let answers = await inquirer.prompt({
       type: 'input',
       message: 'Enter the pin provided by Twitter',
