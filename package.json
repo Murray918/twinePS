@@ -30,11 +30,12 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "fs-extra": "^7.0.0",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.17.0",
     "chalk": "^2.4.1",
     "commander": "^2.18.0",
     "configstore": "^4.0.0",
