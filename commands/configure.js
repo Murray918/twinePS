@@ -27,7 +27,7 @@ const configure = {
     let creds = new CredentialManager(name)
     var [apiKey, apiSecret] = await creds.getKeyAndSecret('consumer')
     let twitter = new Twitter(apiKey, apiSecret)
-    let response = querystring.parse(await twitter.post('oauth/response_token'))
+    let response = querystring.parse(await twitter.post('oauth/request_token'))
     twitter.setToken(response['oauth_token'], response['oauth_token_secret'])
     await inquirer.prompt({
       type: 'input',
