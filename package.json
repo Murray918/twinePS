@@ -49,6 +49,7 @@
     "promise-streams": "^2.1.1",
     "sinon": "^6.3.1",
     "split2": "^3.0.0",
+    "stream-mock": "^1.2.0",
     "through2": "^2.0.3"
   }
 }
