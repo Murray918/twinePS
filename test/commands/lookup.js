@@ -50,6 +50,21 @@ describe('the lookup module', () => {
         done()
       })
     })
+    it('should lookup users on the command line', (done) => {
+      let stdout = new WritableMock()
+      lookup.users('twine-test', 'foo,bar', { stdout })
+      stdout.on('finish', () => {
+        expect(JSON.parse(stdout.data))
+          .to.deep.equal([{ screen_name: 'foo' }, { screen_name: 'bar' }])
+        done()
+      })
+    })
+    it('should reject on error', async () => {
+      Twitter.prototype.get.restore()
+      sandbox.stub(Twitter.prototype, 'get').rejects(new Error('Test Error'))
+      let stdout = new WritableMock()
+      await expect(lookup.users('twine-test', 'foo', { stdout })).to.be.rejectedWith('Test Error')
+    })
   })
   afterEach(() => {
     sandbox.restore()
