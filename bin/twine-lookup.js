@@ -7,10 +7,18 @@ program
   .version(pkg.version)
 
 program
-  .command('users [screen-names')
+  .command('users [screen-names]')
   .description('Find users by their screen name')
   .action((names) => lookup
     .users(pkg.name, names)
+    .catch(util.handleError)
+  )
+
+program
+  .command('statuses [ids]')
+  .description('Find statuses (tweets) by their ID')
+  .action((ids) => lookup
+    .users(pkg.name, ids)
     .catch(util.handleError)
   )
 
@@ -20,3 +28,6 @@ program
 if (!process.argv.slice(2).length) {
   program.outputHelp()
 }
+
+// type users.txt |twine lookup users | jq "[.[] | { name, screen_name, location }]"
+// type users.txt |twine lookup tweets.txt | jq "[.[] {user, text, created_at, source}] "
