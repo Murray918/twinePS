@@ -18,7 +18,7 @@ program
   .command('statuses [ids]')
   .description('Find statuses (tweets) by their ID')
   .action((ids) => lookup
-    .users(pkg.name, ids)
+    .statuses(pkg.name, ids)
     .catch(util.handleError)
   )
 
